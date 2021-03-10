@@ -1,16 +1,22 @@
 # Band Data Requester
 
+This repository contains a proof-of-concept implementation of the flow of requesting price data on BandChain and feeding it to Band's `StdReference` contract on the Ethereum Kovan Testnet.
+
 ## Flow
 
 - User send a request to Band's oracle network (e.g. for the price of a cryptocurrency token)
 - BandChain's validators goes out to fetch data from the specified data sources and then aggregates the results into a single final result and store it on-chain
 - The user then fetches the proof of that request and relay it to our `StdReference` contract by calling `relayWithProof`.
 - The `StdReference` then passes the proof bytes to our `Bridge` contract to verify the validity of the proof. If successful, the decoded price data is saved. (See this [explainer article](https://medium.com/bandprotocol/understanding-band-oracle-3-lite-client-verification-d03ed3f4ccb8) for more details)
-- The price data on the contract is now updated for anyone to use.
+- The price data on the contract is now updated for anyone to use through calling the `getReferenceData` and `getReferenceDataBulk` methods.
 
 ## References
 
 ### Documentatation
+
+#### Band Standard Dataset
+
+- [Documentation](https://docs.bandchain.org/band-standard-dataset/)
 
 #### Band Oracle Data Request Explainer Series
 
